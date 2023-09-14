@@ -6,7 +6,7 @@ create_db = """
 CREATE DATABASE mydb;
 """
 
-if __name__ == "__main__":
+def create_db():
     try:
         conn = BaseConn(user='postgres', password='mysecretpassword')
         conn.connect()
@@ -28,3 +28,7 @@ if __name__ == "__main__":
             cursor.close()
         if conn:
             conn.disconnect()
+
+
+if __name__ == "__main__":
+    create_db()
