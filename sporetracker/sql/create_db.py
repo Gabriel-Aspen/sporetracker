@@ -1,34 +1,13 @@
 import psycopg2
-from sporetracker.util.db_conn import BaseConn
+from sporetracker.util.db_conn import DBUtil
 from psycopg2 import OperationalError
 
-create_db = """
-CREATE DATABASE mydb;
-"""
-
 def create_db():
-    try:
-        conn = BaseConn(user='postgres', password='mysecretpassword')
-        conn.connect()
-        conn.connection.autocommit = True
-
-        cursor = conn.connection.cursor()
-
-        cursor.execute(create_db)
-        
-        conn.connection.commit()
-
-        print("Database created successfully!")
-
-    except OperationalError as e:
-        print(f"Error connecting to PostgreSQL: {e}")
-    finally:
-        # Close the cursor and connection
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.disconnect()
-
+    create_db = """
+    CREATE DATABASE mydb;
+    """
+    util = DBUtil(user='postgres', password='mysecretpassword')
+    util.execute(create_db)
 
 if __name__ == "__main__":
     create_db()

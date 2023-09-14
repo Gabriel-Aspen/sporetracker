@@ -1,5 +1,3 @@
-import psycopg2
-from psycopg2 import OperationalError
 from sqlalchemy import create_engine
 
 class PandasUtil:
